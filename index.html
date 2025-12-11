@@ -1,0 +1,339 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student At Risk Prediction</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: center;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Student performance Prediction</h2>
+    <form method="POST" action="/predict">
+      <label>Gender:</label>
+      <select name="Gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label>Age:</label>
+      <input type="number" name="Age" required>
+
+      <label>Department:</label>
+      <select name="Department">
+        <option value="CS">CS</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Business">Business</option>
+      </select>
+
+      <label>Attendance (%):</label>
+      <input type="number" step="0.01" name="attendance" required>
+
+      <label>Exam-1 Score:</label>
+      <input type="number" step="0.01" name="midterm" required>
+
+      <label>Exam-2 Score:</label>
+      <input type="number" step="0.01" name="final" required>
+
+      <label>Assignments Avg:</label>
+      <input type="number" step="0.01" name="assignments" required>
+
+      <label>Quizzes Avg:</label>
+      <input type="number" step="0.01" name="quizzes" required>
+
+      <label>Participation Score:</label>
+      <input type="number" step="0.01" name="participation" required>
+
+      <label>Projects Score:</label>
+      <input type="number" step="0.01" name="projects" required>
+
+      <label>Total Score:</label>
+      <input type="number" step="0.01" name="total" required>
+
+      <label>Study Hours per Week:</label>
+      <input type="number" step="0.01" name="study_hours" required>
+
+      <label>Extracurricular Activities:</label>
+      <select name="extracurricular_activities">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label>Internet Access at Home:</label>
+      <select name="internet_access">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label>Parent Education Level:</label>
+      <select name="parent_education">
+        <option value="High School">High School</option>
+        <option value="Master's">Master's</option>
+        <option value="Bachelor's">Bachelor's</option>
+        <option value="PhD">PhD</option>
+      </select>
+
+      <label>Family Income Level:</label>
+      <select name="family_income">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+
+      <label>Stress Level (1-10):</label>
+      <input type="number" min="1" max="10" name="stress_level" required>
+
+      <label>Sleep Hours per Night:</label>
+      <input type="number" step="0.01" name="sleep_hours" required>
+
+      <button type="submit">Predict</button>
+    </form>
+    {% if result %}
+      <div class="result">
+        Prediction: <strong>{{ result }}</strong>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student At Risk Prediction</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f5f4f0;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 48px auto;
+      background: #fff;
+      padding: 32px 28px 28px 28px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(60, 60, 70, 0.07);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 28px;
+      color: #1e1e23;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    label {
+      display: block;
+      margin-top: 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #393950;
+      transition: color 0.2s;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 10px 12px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1.2px solid #dadada;
+      font-size: 15px;
+      background: #fafbfc;
+      transition: border 0.2s;
+      box-sizing: border-box;
+    }
+    input:focus,
+    select:focus {
+      outline: none;
+      border-color: #3da984;
+      background: #f6fff9;
+    }
+    button {
+      margin-top: 26px;
+      width: 100%;
+      padding: 11px;
+      background: linear-gradient(90deg, #3da984 0%, #266f58 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.1em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    button:hover,
+    button:focus {
+      background: linear-gradient(90deg, #266f58 0%, #3da984 100%);
+      transform: translateY(-2px) scale(1.01);
+    }
+    .result {
+      margin-top: 28px;
+      font-size: 19px;
+      text-align: center;
+      color: #1d723b;
+      background: #edfaef;
+      border-radius: 6px;
+      padding: 12px 0;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(61,169,132,0.04);
+    }
+    @media (max-width: 700px) {
+      .container {
+        padding: 18px 6vw 18px 6vw;
+      }
+      h2 {
+        font-size: 1.35rem;
+      }
+      button {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Student performance Prediction</h2>
+    <form method="POST" action="/predict">
+      <label>Gender:</label>
+      <select name="Gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label>Age:</label>
+      <input type="number" name="Age" required>
+
+      <label>Department:</label>
+      <select name="Department">
+        <option value="CS">CS</option>
+        <option value="Engineering">Engineering</option>
+        <option value="Business">Business</option>
+      </select>
+
+      <label>Attendance (%):</label>
+      <input type="number" step="0.01" name="attendance" required>
+
+      <label>Exam-1 Score:</label>
+      <input type="number" step="0.01" name="midterm" required>
+
+      <label>Exam-2 Score:</label>
+      <input type="number" step="0.01" name="final" required>
+
+      <label>Assignments Avg:</label>
+      <input type="number" step="0.01" name="assignments" required>
+
+      <label>Quizzes Avg:</label>
+      <input type="number" step="0.01" name="quizzes" required>
+
+      <label>Participation Score:</label>
+      <input type="number" step="0.01" name="participation" required>
+
+      <label>Projects Score:</label>
+      <input type="number" step="0.01" name="projects" required>
+
+      <label>Total Score:</label>
+      <input type="number" step="0.01" name="total" required>
+
+      <label>Study Hours per Week:</label>
+      <input type="number" step="0.01" name="study_hours" required>
+
+      <label>Extracurricular Activities:</label>
+      <select name="extracurricular_activities">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label>Internet Access at Home:</label>
+      <select name="internet_access">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label>Parent Education Level:</label>
+      <select name="parent_education">
+        <option value="High School">High School</option>
+        <option value="Master's">Master's</option>
+        <option value="Bachelor's">Bachelor's</option>
+        <option value="PhD">PhD</option>
+      </select>
+
+      <label>Family Income Level:</label>
+      <select name="family_income">
+        <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
+      </select>
+
+      <label>Stress Level (1-10):</label>
+      <input type="number" min="1" max="10" name="stress_level" required>
+
+      <label>Sleep Hours per Night:</label>
+      <input type="number" step="0.01" name="sleep_hours" required>
+
+      <button type="submit">Predict</button>
+    </form>
+    {% if result %}
+      <div class="result">
+        Prediction: <strong>{{ result }}</strong>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
